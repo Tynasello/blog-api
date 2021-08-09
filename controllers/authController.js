@@ -1,7 +1,10 @@
-const User = require("../models/user");
-const { body, validationResult } = require("express-validator");
+require("dotenv").config();
+
+const User = require("../models/User");
 
 const bcrypt = require("bcrypt");
+
+const jwt = require("jsonwebtoken");
 
 /*--------------------------------------------------------------*/
 
@@ -23,7 +26,7 @@ exports.sign_up = async function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.redirect("/users/log-in");
+      res.redirect("/");
     });
   });
 };
@@ -33,31 +36,32 @@ exports.sign_up = async function (req, res, next) {
 
 exports.log_in = async function (req, res, next) {
   // Authenticate user
-  User.findOne({ username: req.body.username }, (err, user) => {
-    if (!user) {
-      return res.status(404).json({ errors: [{ message: `User not found` }] });
-    }
-    if (
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
-        if (result) {
-          // passwords match! log user in
-          return res.status(200).json("Log in successful");
-        } else {
-          // passwords do not match!
-          return res
-            .status(404)
-            .json({ errors: [{ message: `Incorrect Password` }] });
-        }
-      })
-    )
-      return res.status(200).json("Log in successful");
-  });
+  // Check if account exists
+  const user = await User.findOne({ username: req.body.username });
+  if (!user) {
+    return res.status(400).json({ errors: [{ message: `User not found` }] });
+  }
+  // Authenticate password
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+  if (!validPass) {
+    return res
+      .status(400)
+      .json({ errors: [{ message: `Incorrect Password` }] });
+  }
+  // passwords match! log user in
+  // Create and assign json web token
+  const accessToken = jwt.sign(
+    { _id: user._id },
+    process.env.ACCESS_TOKEN_SECRET
+  );
+  res
+    .header("auth-token", accessToken)
+    .send({ token: accessToken, message: "login sucessful" });
 };
 
 /*--------------------------------------------------------------*/
 // Log out
 
 exports.log_out = function (req, res) {
-  req.logout();
-  res.redirect("/");
+  //
 };
