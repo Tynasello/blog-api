@@ -5,7 +5,7 @@
  */
 
 const app = require("../app");
-const debug = require("debug")("blog_api:server");
+const debug = require("debug")("blog-api:server");
 const http = require("http");
 
 /**
