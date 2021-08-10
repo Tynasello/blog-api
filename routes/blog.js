@@ -5,7 +5,7 @@ const comment_controller = require("../controllers/commentController");
 const auth_controller = require("../controllers/authController");
 const router = express.Router();
 
-const verify = require("../verifyToken");
+const verify = require("../middleware/verifyToken");
 
 /*----------------------------------------------------------------
 
@@ -92,6 +92,8 @@ router.post("/sign-up", auth_controller.sign_up);
 router.post("/log-in", auth_controller.log_in);
 
 router.delete("/logout", auth_controller.log_out);
+
+router.get("/user", verify, auth_controller.get_user);
 
 router.get("/users", auth_controller.get_users);
 
