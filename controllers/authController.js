@@ -17,6 +17,11 @@ exports.get_users = async function (req, res, next) {
 // Sign up
 
 exports.sign_up = async function (req, res, next) {
+  if (!req.body.password || !req.body.username) {
+    return res.status(400).json({
+      errors: [{ message: `Please enter a valid username and password` }],
+    });
+  }
   //   const salt = await bcrypt.genSalt();
   bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
     const user = new User({
@@ -35,6 +40,11 @@ exports.sign_up = async function (req, res, next) {
 // Log in
 
 exports.log_in = async function (req, res, next) {
+  if (!req.body.password || !req.body.username) {
+    return res.status(400).json({
+      errors: [{ message: `Please enter a valid username and password` }],
+    });
+  }
   // Authenticate user
   // Check if account exists
   const user = await User.findOne({ username: req.body.username });
@@ -52,16 +62,27 @@ exports.log_in = async function (req, res, next) {
   // Create and assign json web token
   const accessToken = jwt.sign(
     { _id: user._id },
-    process.env.ACCESS_TOKEN_SECRET
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: 3600 }
   );
   res
     .header("auth-token", accessToken)
-    .send({ token: accessToken, message: "login sucessful" });
+    .send({ token: accessToken, user, message: "login sucessful" });
 };
 
 /*--------------------------------------------------------------*/
 // Log out
 
 exports.log_out = function (req, res) {
-  //
+  res.json("Log out controller");
 };
+
+/*--------------------------------------------------------------*/
+// Get user by token
+
+exports.get_user = async function (req, res) {
+  const user = await User.findById(req.user._id).select("-password");
+  res.json(user);
+};
+
+/*--------------------------------------------------------------*/
