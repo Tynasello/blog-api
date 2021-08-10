@@ -7,7 +7,7 @@ const Post = require("../models/post");
 
 exports.get_blog_posts = async function (req, res, next) {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find();
     if (!posts) {
       return res.status(404).json({ err: "posts not found" });
     }
