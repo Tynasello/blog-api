@@ -1,6 +1,6 @@
 const express = require("express");
 
-const post_controller = require("../controllers/postController");
+// const post_controller = require("../controllers/postController");
 const comment_controller = require("../controllers/commentController");
 const auth_controller = require("../controllers/authController");
 const router = express.Router();
@@ -23,23 +23,23 @@ Post Routes
 ----------------------------------------------------------------*/
 // Getting all posts
 
-router.get("/posts", post_controller.get_blog_posts);
+// router.get("/posts", post_controller.get_blog_posts);
 
-/*--------------------------------------------------------------*/
-// Getting single post
-router.get("/posts/:id", post_controller.get_blog_post);
+// /*--------------------------------------------------------------*/
+// // Getting single post
+// router.get("/posts/:id", post_controller.get_blog_post);
 
-/*--------------------------------------------------------------*/
-// Creating post
-router.post("/posts", verify, post_controller.create_blog_post);
+// /*--------------------------------------------------------------*/
+// // Creating post
+// router.post("/posts", verify, post_controller.create_blog_post);
 
-/*--------------------------------------------------------------*/
-// Deleting post
-router.delete("/posts/:id", verify, post_controller.delete_blog_post);
+// /*--------------------------------------------------------------*/
+// // Deleting post
+// router.delete("/posts/:id", verify, post_controller.delete_blog_post);
 
-/*--------------------------------------------------------------*/
-// Updating post
-router.patch("/posts/:id", verify, post_controller.update_blog_post);
+// /*--------------------------------------------------------------*/
+// // Updating post
+// router.patch("/posts/:id", verify, post_controller.update_blog_post);
 
 /*----------------------------------------------------------------
 Comment Routes
