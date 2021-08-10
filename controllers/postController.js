@@ -6,22 +6,15 @@ const Post = require("../models/post");
 /*--------------------------------------------------------------*/
 
 exports.get_blog_posts = async function (req, res, next) {
-  Post.find({}).exec(function (err, posts) {
-    if (err) {
-      return next(err);
+  try {
+    const posts = await Post.find();
+    if (!posts) {
+      return res.status(404).json({ err: "posts not found" });
     }
-    //Successful, so render
-    res.json({ posts });
-  });
-  // try {
-  //   const posts = await Post.find();
-  //   if (!posts) {
-  //     return res.status(404).json({ err: "posts not found" });
-  //   }
-  //   res.status(200).json({ posts });
-  // } catch (err) {
-  //   res.status(500).json({ message: err.message });
-  // }
+    res.status(200).json({ posts });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 /*--------------------------------------------------------------*/
