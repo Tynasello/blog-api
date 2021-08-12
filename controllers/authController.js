@@ -61,12 +61,8 @@ exports.log_in = async function (req, res, next) {
   }
   // passwords match! log user in
   // Create and assign json web token
-  const accessToken = jwt.sign(
-    // { _id: user._id },
-    process.env.ACCESS_TOKEN_SECRET
-    // { expiresIn: 3600 }
-  );
-  res.status(200).json({ auth_token: accessToken, message: "login sucessful" });
+  const accessToken = jwt.sign({ _id: user._id }, "4343940394039");
+  res.json({ token: accessToken, user, message: "login sucessful" });
 };
 
 /*--------------------------------------------------------------*/
