@@ -68,7 +68,7 @@ exports.log_in = async function (req, res, next) {
   );
   res
     .header("auth-token", accessToken)
-    .send({ token: accessToken, user, message: "login sucessful" });
+    .json({ token: accessToken, user, message: "login sucessful" });
 };
 
 /*--------------------------------------------------------------*/
