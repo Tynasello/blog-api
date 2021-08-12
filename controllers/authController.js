@@ -66,9 +66,7 @@ exports.log_in = async function (req, res, next) {
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: 3600 }
   );
-  res
-    .header("auth-token", accessToken)
-    .json({ token: accessToken, user, message: "login sucessful" });
+  res.json({ token: accessToken, user, message: "login sucessful" });
 };
 
 /*--------------------------------------------------------------*/
