@@ -50,14 +50,12 @@ exports.log_in = async function (req, res, next) {
   // Check if account exists
   const user = await User.findOne({ username: req.body.username });
   if (!user) {
-    return res.status(400).json({ errors: [{ message: `User not found` }] });
+    return res.status(400).json({ auth: false, message: "No user exists" });
   }
   // Authenticate password
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
-    return res
-      .status(400)
-      .json({ errors: [{ message: `Incorrect Password` }] });
+    return res.status(400).json({ auth: false, message: "Incorrect password" });
   }
   // passwords match! log user in
   // Create and assign json web token
