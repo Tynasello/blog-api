@@ -65,7 +65,7 @@ exports.log_in = async function (req, res, next) {
     { expiresIn: 3600 }
   );
   res
-    .header("auth-token", accessToken)
+    .header("Authorization", accessToken)
     .send({ auth: true, token: accessToken, user, message: "login sucessful" });
 };
 
