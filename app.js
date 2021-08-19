@@ -4,12 +4,14 @@ const createError = require("http-errors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
 
+// Index and blog routes
 const indexRouter = require("./routes/index");
 const blogRouter = require("./routes/blog");
 
-const compression = require("compression");
-const helmet = require("helmet");
+/*------------------------------------------------------------*/
 
 //Set up mongoose connection
 const mongoose = require("mongoose");
@@ -22,15 +24,22 @@ mongoose.connect(mongoDB, {
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+/*------------------------------------------------------------*/
+
 const app = express();
+
+/*------------------------------------------------------------*/
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(compression()); //Compress all routes
+app.use(compression());
 app.use(helmet());
 
+/*------------------------------------------------------------*/
+
+// Response Headers
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -44,8 +53,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+/*------------------------------------------------------------*/
+// Add routes to middleware chain.
 app.use("/", indexRouter);
 app.use("/blog", blogRouter);
+
+/*------------------------------------------------------------*/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
