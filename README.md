@@ -6,7 +6,7 @@ A **Node/Express** REST API for creating personal blogs.
 
 Blog API created with [NodeJS](https://nodejs.dev/), [Express](https://expressjs.com/) and [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-The code for the frontend of this project can be veiwed [here](https://tynasello-express-library.herokuapp.com/catalog), and the live demo [here](https://tynasello-express-library.herokuapp.com/catalog).
+The code for the frontend of this project can be veiwed [here](https://github.com/Tynasello/blog-frontend), and the live demo [here](https://tynasello.github.io/blog-frontend/).
 
 API supports personal blogs with admin-only features, including creating, deleting and editing posts, aswell as deleting comments.
 
