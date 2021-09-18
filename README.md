@@ -1,30 +1,30 @@
 # Blog REST API
 
-A **Node/Express** REST API for creating personal blogs.
+A **Node/Express** API constructed in RESTful manner, supporting CRUD commands to a MongoDB database.
 
 ## Overview
 
-Blog API created with [NodeJS](https://nodejs.dev/), [Express](https://expressjs.com/) and [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+Blog API created with [NodeJS](https://nodejs.dev/), [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/cloud/atlas).
 
-The code for the frontend of this project can be veiwed [here](https://github.com/Tynasello/blog-frontend), and the live demo [here](https://tynasello.github.io/blog-frontend/).
-
-API supports personal blogs with admin-only features, including creating, deleting and editing posts, aswell as deleting comments.
+The code for the frontend of this project can be viewed [here](https://github.com/Tynasello/blog-frontend), and the live demo [here](https://tynasello.github.io/blog-frontend/).
 
 **JWT**'s were used to authenticate users, allowing login functionality and access to protected routes.
+
+API supports personal blogs with admin-only features, including creating, deleting, and editing posts, as well as deleting comments.
 
 API deployed with [Heroku](https://www.heroku.com).
 
 ## What I've Learned
 
-> How to create fully functional REST APIs.
+> How to create functional REST APIs.
 >
-> How to recieve GET, POST, DELETE and PACTH JSON data through HTTP requests.
+> How to handle receiving GET, POST, DELETE and PATCH JSON data through HTTP requests.
 >
 > How to organize API routes and controllers in a RESTful manner.
 >
 > How to use the bcrypt library to safely hash and compare sensitive information such as passwords.
 >
-> How to authenticate users and allow access to proteced routes using JSON web tokens
+> How to authenticate users and allow access to protected routes using JSON web tokens
 
 ## Installation
 
@@ -54,7 +54,7 @@ To run the app in development mode with nodemon:
 npm run devstart
 ```
 
-Add the two following environment varibales in your .env file:
+Add the two following environment variables in your .env file:
 
 ```
 MONGO_URI - for connection to Mongo db
@@ -75,11 +75,11 @@ List of available routes
 
 Routes can be accessed through the following URL: 'https://tynasello-blog-api.herokuapp.com/blog/'
 
-An asterisks (\*) before method types signifies protected routes. **x-access-token** must be passed in request header to access these routes
+An asterisk (\*) before method types signifies protected routes. **x-access-token** must be passed in the request header to access these routes
 
 ### Auth
 
-| Method | URI      | Decription               |
+| Method | URI      | Description              |
 | ------ | -------- | ------------------------ |
 | POST   | /sign-up | Sign up                  |
 | POST   | /log-in  | Log in                   |
@@ -88,7 +88,7 @@ An asterisks (\*) before method types signifies protected routes. **x-access-tok
 
 ### Posts
 
-| Method   | URI        | Decription        |
+| Method   | URI        | Description       |
 | -------- | ---------- | ----------------- |
 | GET      | /posts     | All posts         |
 | GET      | /posts/:id | Single post by id |
@@ -98,7 +98,7 @@ An asterisks (\*) before method types signifies protected routes. **x-access-tok
 
 ### Comments
 
-| Method   | URI                                 | Decription               |
+| Method   | URI                                 | Description              |
 | -------- | ----------------------------------- | ------------------------ |
 | GET      | /posts/:postid/comment              | All post comments        |
 | GET      | /posts/:postid/comments/:commentid  | Single comment by id     |
@@ -107,7 +107,7 @@ An asterisks (\*) before method types signifies protected routes. **x-access-tok
 | \*DELETE | /posts/:postid/comments             | Delete all post comments |
 | \*PATCH  | /posts/:postid/comments/:commentid  | Edit comment by id       |
 
-I tested these routes using the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) VSCode extension. Any rest client such as [Postman](https://www.postman.com/) can also be used.
+I tested these routes using the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) VSCode extension. Any rest-client such as [Postman](https://www.postman.com/) can also be used.
 
 ## Example Route Requests
 
@@ -156,7 +156,3 @@ await fetch(`https://tynasello-blog-api.herokuapp.com/blog/posts/`, {
 ## Acknowledgments
 
 Inspiration for this project was found while following the tutorials on [The Odin Project](https://www.theodinproject.com), and advancing to the [NodeJS Project: Blog API](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/blog-api) section.
-
-```
-
-```
